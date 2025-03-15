@@ -1,19 +1,21 @@
 .App {
-  /* background-color: #fafafa; */
-  background-color: #FFFFFF;
   min-height: 100vh;
+  background-color: #f0f0f0; /* Fallback color */
+  background-image: url('assets/images/texture_paper_bg.jpg');
+  background-repeat: repeat;
 }
 
 .main-content {
   display: flex;
   justify-content: center;
   padding: 5px;
+  padding-top: 3rem;
 }
 
 /* Feed area narrower than the full width */
 .feed-section {
   width: 600px; 
-  margin-top: 70px;
+  margin-top: 32px;
 }
 
 /* Hide sidebar on smaller screens */

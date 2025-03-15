@@ -6,6 +6,10 @@ import kuehSalat from "../assets/images/Kueh_Salat.jpg";
 import kuehUbi from "../assets/images/Kueh_Ubi.jpeg";
 import ondehOndeh from "../assets/images/Ondeh_Ondeh.jpeg";
 import angkukueh from "../assets/images/Angku_Kueh.jpg";
+import liveEventSketch from "../assets/videos/Live_Event_Sketch.mp4";
+import familyPortrait from "../assets/videos/Family_Portraits.mp4";
+import weddingMemorySketches from "../assets/videos/Wedding_Memory_Sketches.mp4";
+import customCommissionedArt from "../assets/videos/Custom_Commission_Art.mp4";
 import edl1 from "../assets/images/EDL_1.jpg";
 import edl2 from "../assets/images/EDL_2.jpg";
 import com1 from "../assets/images/Com_1.jpg";
@@ -29,25 +33,25 @@ function Feed() {
     {
       id: 1,
       username: "alice_K",
-      media: [edl1, edl2, com1, com2, com3, com4, com5, com6, com7, com8, com9],
+      media: [liveEventSketch, edl1, edl2, com1, com2, com3, com4, com5, com6, com7, com8, com9],
       caption: "Commissioned quick sketches for my colleague and their kids! 🎨👨‍👩‍👧‍👦✏️"
     },
     {
       id: 2,
       username: "HuiY_",
-      media: [HuiYangWeddingVideo],
+      media: [weddingMemorySketches, HuiYangWeddingVideo],
       caption: "Wedding highlight: Surprised guests with live portrait sketching at my special day! 🎨👰✨"
     },
     {
       id: 3,
       username: "KapYee_Wanton", 
-      media: [YapKeeWanton, YapKeeWantonVideo],
+      media: [familyPortrait, YapKeeWanton, YapKeeWantonVideo],
       caption: "Commissioned Jeff to do a sketch for my parents' wanton mee store! Thank you Jeff for promoting our family business. So happy to see their smiles upon receiving this artwork! 🎨🥟✨"
     },
     {
       id: 4,
       username: "Jas_",
-      media: [KuehDadarVideo, kuehDadar, angkukueh, ondehOndeh, kuehUbi, kuehSalat, kuehLapis],
+      media: [customCommissionedArt, KuehDadarVideo, kuehDadar, angkukueh, ondehOndeh, kuehUbi, kuehSalat, kuehLapis],
       caption: "Check out these amazing desserts! Got a commission for my kueh illos! 🎨👩‍🍳✨"
     },
     // ... more dummy posts
