@@ -3,15 +3,16 @@
     align-items: center;
     justify-content: space-between;
     height: 60px;
-    background: #ffffff;
     border-bottom: 1px solid #dbdbdb;
+    background-image: url('../assets/images/texture_paper_bg.jpg');
+    background-repeat: repeat;
     padding: 0 20px;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
-    max-width: 975px;  /* Instagram's max width */
+    padding: 0 2rem;
     margin: 0 auto;  /* Center the navbar */
   }
   
@@ -80,13 +81,23 @@
   
   /* Add a container for the navbar to handle full-width background */
   .navbar-container {
-    width: 100%;
-    background: #ffffff;
-    border-bottom: 1px solid #dbdbdb;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
+    transition: transform 0.3s ease;
+    background-color: white; /* or any color you prefer */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .navbar-visible {
+    transform: translateY(0);
+  }
+  
+  .navbar-hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.5s ease;
   }
   

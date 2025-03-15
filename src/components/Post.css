@@ -164,19 +164,41 @@
   /* Position dots at the bottom of post-media */
   .slick-dots {
     position: absolute;
+    width: 30% !important; /* Reduce width to 30% of container */
+    left: 50% !important; /* Center the dots container */
+    transform: translateX(-50%) !important; /* Center the dots container */
     bottom: 0 !important;
     padding-bottom: 10px;
     z-index: 1;
+    display: flex !important;
+    justify-content: center;
+    gap: 10px; /* Reduce gap between dots */
   }
   
-  .slick-dots li button:before {
-    color: white !important;
-    opacity: 0.8;
+  .slick-dots li {
+    margin: 0 !important; /* Remove default margins */
+    width: 6px !important; /* Make dots smaller */
+    height: 6px !important; /* Make dots smaller */
   }
   
-  .slick-dots li.slick-active button:before {
-    opacity: 1;
+  .slick-dots li button {
+    width: 6px !important; /* Make dots smaller */
+    height: 6px !important; /* Make dots smaller */
+    padding: 0 !important;
   }
+
+
+.slick-dots li button:before {
+  font-size: 6px !important; /* Make dots smaller */
+  width: 6px !important; /* Make dots smaller */
+  height: 6px !important; /* Make dots smaller */
+  color: white !important;
+  opacity: 0.8;
+}
+
+.slick-dots li.slick-active button:before {
+  opacity: 1;
+}
   
   /* Navigation arrows */
   .slick-prev,
@@ -184,7 +206,6 @@
     z-index: 1;
     width: 30px;
     height: 30px;
-    background-color: rgba(255, 255, 255, 0.8) !important;
     border-radius: 50%;
   }
   
@@ -198,7 +219,6 @@
   
   .slick-prev:before,
   .slick-next:before {
-    color: #262626 !important;
     opacity: 1;
   }
   

@@ -81,7 +81,6 @@ function Sidebar() {
       <a 
         href="https://www.instagram.com/playingwithpencil/"
         target="_blank" 
-
         rel="noopener noreferrer"
         onClick={(e) => e.stopPropagation()}
       >

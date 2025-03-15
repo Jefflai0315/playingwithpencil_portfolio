@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import UseAnimations from 'react-useanimations';
 import mail from 'react-useanimations/lib/mail';
 import pwpLogo from "../assets/images/pwp.PNG";
@@ -7,6 +7,9 @@ import "./Navbar.css";
 function Navbar() {
   const [checked, setChecked] = useState(false);
   const [popupPosition, setPopupPosition] = useState({ top: 0, left: 0 });
+  const [visible, setVisible] = useState(true);
+  const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
+
 
   const handleContactClick = (e) => {
     e.stopPropagation();
@@ -26,6 +29,23 @@ function Navbar() {
     }
     return () => document.removeEventListener('click', closePopup);
   }, [checked]);
+
+    // Handle navbar visibility on scroll
+    useEffect(() => {
+      console.log(visible);
+      const handleScroll = () => {
+        const currentScrollPos = window.pageYOffset;
+        const visible = prevScrollPos > currentScrollPos || currentScrollPos < 10;
+  
+        setPrevScrollPos(currentScrollPos);
+        setVisible(visible);
+      };
+  
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+     
+    }, [prevScrollPos]);
+  
 
   const renderContactPopup = () => (
     <div 
@@ -63,8 +83,8 @@ function Navbar() {
   );
   
   return (
-    <div className="navbar-container">
-      <nav className="navbar">
+    <div className={`navbar-container ${visible ? 'navbar-visible' : 'navbar-hidden'}`}>
+      <nav className="navbar w-full h-16">
         <div className="nav-left">
           <img 
             src={pwpLogo} 
