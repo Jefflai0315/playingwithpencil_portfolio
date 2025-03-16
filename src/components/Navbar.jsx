@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import UseAnimations from 'react-useanimations';
 import mail from 'react-useanimations/lib/mail';
+import edit from 'react-useanimations/lib/edit';
+import whatsapp from 'react-useanimations/lib/instagram';
+import email from 'react-useanimations/lib/mail';
+import instagram from 'react-useanimations/lib/instagram';
 import pwpLogo from "../assets/images/pwp.PNG";
 import "./Navbar.css";
 
@@ -19,6 +23,12 @@ function Navbar() {
       left: buttonRect.left + window.scrollX
     });
     setChecked(!checked);
+  };
+
+  const handleFeedbackClick = (e) => {
+    // go to the feedback page https://playingwithpencil.canny.io/feature-requests
+    // window.open('https://playingwithpencil.canny.io/feature-requests', '_blank');
+    setShowFeedbackMessage(!showFeedbackMessage);
   };
 
   // Add click outside handler
@@ -62,25 +72,76 @@ function Navbar() {
         target="_blank" 
         rel="noopener noreferrer"
         onClick={(e) => e.stopPropagation()}
+        className="flex flex-row items-center justify-between gap-2"
       >
-        WhatsApp 💬
+        <div>WhatsApp</div>
+        <UseAnimations
+          animation={whatsapp}
+          size={24}
+        />
       </a>
       <a 
         href="mailto:playingwithpencil@gmail.com"
         onClick={(e) => e.stopPropagation()}
+        className="flex flex-row items-center justify-between gap-2"
       >
-        Email ✉️
+        <div>Email</div>
+        <UseAnimations
+          animation={email}
+          size={24}
+        />
       </a>
       <a 
         href="https://www.instagram.com/playingwithpencil/"
         target="_blank" 
         rel="noopener noreferrer"
         onClick={(e) => e.stopPropagation()}
+        className="flex flex-row items-center justify-between gap-2"
       >
-        Instagram 📸
+        <div>Instagram</div>
+        <UseAnimations
+          animation={instagram}
+          size={24}
+        />
       </a>
     </div>
   );
+
+
+  //for feedback
+  const [showFeedbackMessage, setShowFeedbackMessage] = useState(true);
+  const [lastScrollTime, setLastScrollTime] = useState(Date.now());
+  
+  useEffect(() => {
+    let scrollTimer;
+    
+    const handleScroll = () => {
+      setShowFeedbackMessage(false);
+      setLastScrollTime(Date.now());
+      
+      // Clear existing timer
+      if (scrollTimer) {
+        clearTimeout(scrollTimer);
+      }
+      
+      // Set new timer
+      scrollTimer = setTimeout(() => {
+        const timeElapsed = Date.now() - lastScrollTime;
+        if (timeElapsed >= 5000) { // 5 seconds
+          setShowFeedbackMessage(true);
+        }
+      }, 5000);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimer) {
+        clearTimeout(scrollTimer);
+      }
+    };
+  }, [lastScrollTime]);
+  
   
   return (
     <div className={`navbar-container ${visible ? 'navbar-visible' : 'navbar-hidden'}`}>
@@ -92,9 +153,8 @@ function Navbar() {
             className="logo"
           />
         </div>
-        <div className="nav-center">
-          <span className="nav-icon"></span>
-          <div className="contact-icon-mobile">
+        <div className="nav-center flex flex-row gap-4">
+          <div className="contact-icon-mobile cursor-pointer">
             <UseAnimations
               animation={mail}
               size={32}
@@ -102,6 +162,29 @@ function Navbar() {
               reverse={checked}
             />
             {checked && renderContactPopup()}
+          </div>
+          <div className="feedback-icon">
+            <div className="contact-icon-mobile cursor-pointer">
+                <UseAnimations
+                  animation={edit}
+                  size={32}
+                  onClick={handleFeedbackClick}
+                />
+                {showFeedbackMessage && (
+                  <div className="feedback-dropdown">
+                    <p>Website under development! 🚀</p>
+                    <p>Thank you for supporting me as both an artist and software engineer.</p>
+                    <a 
+                      href="https://playingwithpencil.canny.io/feature-requests" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="feedback-link"
+                    >
+                      Share your feedback →
+                    </a>
+                  </div>
+                )}
+            </div>
           </div>
         </div>
       </nav>

@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import UseAnimations from 'react-useanimations';
 import heart from 'react-useanimations/lib/heart';
 import Slider from "react-slick";
+import volume from 'react-useanimations/lib/volume';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Post.css";
@@ -13,7 +14,7 @@ function Post({ username, media, caption }) {
   const [showControls, setShowControls] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const videoRef = useRef(null);
+  const videoRefs = useRef({});
 
   useEffect(() => {
     // Create intersection observer
@@ -60,32 +61,32 @@ function Post({ username, media, caption }) {
 
   const handleVideoClick = (e) => {
     e.preventDefault();
-    if (videoRef.current) {
-      if (videoRef.current.paused) {
-        videoRef.current.play();
+    if (videoRefs.current[currentSlide]) {
+      if (videoRefs.current[currentSlide].paused) {
+        videoRefs.current[currentSlide].play();
       } else {
-        videoRef.current.pause();
+        videoRefs.current[currentSlide].pause();
       }
     }
   };
 
   const toggleMute = (e) => {
     e.stopPropagation();
-    if (videoRef.current) {
+    if (videoRefs.current[currentSlide]) {
       setIsMuted(!isMuted);
-      videoRef.current.muted = !isMuted;
+      videoRefs.current[currentSlide].muted = !isMuted;
     }
   };
 
-  const handleTimeUpdate = () => {
-    if (videoRef.current) {
-      setCurrentTime(videoRef.current.currentTime);
+  const handleTimeUpdate = (index) => {
+    if (videoRefs.current[index]) {
+      setCurrentTime(videoRefs.current[index].currentTime);
     }
   };
 
-  const handleLoadedMetadata = () => {
-    if (videoRef.current) {
-      setDuration(videoRef.current.duration);
+  const handleLoadedMetadata = (index) => {
+    if (videoRefs.current[index]) {
+      setDuration(videoRefs.current[index].duration);
     }
   };
 
@@ -95,8 +96,8 @@ function Post({ username, media, caption }) {
     const rect = timeline.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const percent = x / rect.width;
-    if (videoRef.current) {
-      videoRef.current.currentTime = percent * videoRef.current.duration;
+    if (videoRefs.current[currentSlide]) {
+      videoRefs.current[currentSlide].currentTime = percent * videoRefs.current[currentSlide].duration;
     }
   };
 
@@ -107,7 +108,7 @@ function Post({ username, media, caption }) {
     return img.width === img.height;
   };
 
-  const renderMedia = (mediaUrl) => {
+  const renderMedia = (mediaUrl, index) => {
     if (!mediaUrl) {
       console.log('No media URL provided');
       return null;
@@ -125,28 +126,32 @@ function Post({ username, media, caption }) {
             onMouseLeave={() => setShowControls(false)}
           >
             <video 
-              ref={videoRef}
+              ref={el => videoRefs.current[index] = el}
               className="post-video"
               playsInline
               loop
               muted={isMuted}
               preload="metadata"
               onClick={handleVideoClick}
-              onTimeUpdate={handleTimeUpdate}
-              onLoadedMetadata={handleLoadedMetadata}
+              onTimeUpdate={() => handleTimeUpdate(index)}
+              onLoadedMetadata={() => handleLoadedMetadata(index)}
             >
               <source src={mediaUrl} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             
-            {showControls && (
-              <div className="video-controls">
-                <button 
+            {showControls && currentSlide === index && (
+              <div className="video-controls"  onClick={(e) => {
+                e.stopPropagation();
+                toggleMute(e);
+              }}>
+                <UseAnimations
+                  animation={volume}
+                  size={24}
+                  strokeColor="white"
                   className="mute-button"
-                  onClick={toggleMute}
-                >
-                  {isMuted ? "🔇" : "🔊"}
-                </button>
+                  reverse={!isMuted}
+                />
                 
                 <div 
                   className="video-timeline"
@@ -204,24 +209,23 @@ function Post({ username, media, caption }) {
             <Slider {...settings}>
               {media.map((mediaUrl, index) => (
                 <div key={index} className="media-slide">
-                  {renderMedia(mediaUrl)}
+                  {renderMedia(mediaUrl, index)}
                 </div>
               ))}
             </Slider>
           ) : (
-            renderMedia(media[0])
+            renderMedia(media[0], 0)
           )
         ) : (
-          renderMedia(media)
+          renderMedia(media, 0)
         )}
       </div>
 
-      <div className="post-actions">
+      <div className="post-actions" onClick={() => setIsLiked(!isLiked)}>
         <UseAnimations
           animation={heart}
           size={28}
-          reverse={isLiked}
-          onClick={() => setIsLiked(!isLiked)}
+          reverse={!isLiked}
           strokeColor={isLiked ? '#ed4956' : undefined}
           fillColor={isLiked ? '#ed4956' : undefined}
         />

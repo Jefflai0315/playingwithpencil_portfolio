@@ -242,21 +242,7 @@
     opacity: 1;
   }
   
-  .mute-button {
-    background: rgba(0, 0, 0, 0.5);
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-size: 1.2rem;
-    padding: 5px;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    z-index: 3;
-  }
+
   
   .video-timeline {
     flex-grow: 1;
@@ -314,4 +300,18 @@
     display: flex;
     align-items: center;
   }
+  
+  .mute-button {
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.2s ease;
+  }
+  
+
   
