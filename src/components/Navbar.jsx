@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import UseAnimations from 'react-useanimations';
 import mail from 'react-useanimations/lib/mail';
 import edit from 'react-useanimations/lib/edit';
+import youtube2 from 'react-useanimations/lib/youtube2';
 import whatsapp from 'react-useanimations/lib/instagram';
 import email from 'react-useanimations/lib/mail';
 import instagram from 'react-useanimations/lib/instagram';
 import pwpLogo from "../assets/images/pwp.PNG";
 import "./Navbar.css";
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   const [checked, setChecked] = useState(false);
@@ -147,11 +149,13 @@ function Navbar() {
     <div className={`navbar-container ${visible ? 'navbar-visible' : 'navbar-hidden'}`}>
       <nav className="navbar w-full h-16">
         <div className="nav-left">
+          <Link to="/">
           <img 
             src={pwpLogo} 
             alt="PWP Logo" 
             className="logo"
           />
+          </Link>
         </div>
         <div className="nav-center flex flex-row gap-4">
           <div className="contact-icon-mobile cursor-pointer">
@@ -162,6 +166,17 @@ function Navbar() {
               reverse={checked}
             />
             {checked && renderContactPopup()}
+          </div>
+          <div className="feedback-icon">
+            <div className="contact-icon-mobile cursor-pointer">
+              <Link to="/series">
+                <UseAnimations
+                  animation={youtube2}
+                  size={32}
+                />
+                </Link>
+               
+            </div>
           </div>
           <div className="feedback-icon">
             <div className="contact-icon-mobile cursor-pointer">

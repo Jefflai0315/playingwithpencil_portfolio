@@ -195,13 +195,7 @@ function Post({ username, media, caption }) {
 
   return (
     <div className="post">
-      <div className="post-header">
-        <div className="post-user">
-          <div className="avatar">🧑</div>
-          <span className="username">{username}</span>
-        </div>
-        {/* Optionally: more icon or follow button */}
-      </div>
+     
       
       <div className="post-media">
         {Array.isArray(media) ? (
@@ -219,6 +213,13 @@ function Post({ username, media, caption }) {
         ) : (
           renderMedia(media, 0)
         )}
+      </div>
+       <div className="post-header absolute top-0 left-0">
+        <div className="post-user">
+          <div className="avatar">🧑</div>
+          <span className="username">{username}</span>
+        </div>
+        {/* Optionally: more icon or follow button */}
       </div>
 
       <div className="post-actions" onClick={() => setIsLiked(!isLiked)}>

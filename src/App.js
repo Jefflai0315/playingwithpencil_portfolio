@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Stories from "./components/Stories";
+import LandingPage from "./components/LandingPage";
 import Feed from "./components/Feed";
 import Sidebar from "./components/Sidebar";
 import LoadingScreen from "./components/LoadingScreen";
@@ -25,21 +26,26 @@ function App() {
     loadResources();
   }, []);
   return (
-    <div className="App">
-      {isLoading ? (
-        <LoadingScreen />
-      ) : (
-        <>
-          <Navbar />
-          <div className="main-content">
-            <div className="feed-section">
-              <Feed />
+    <Router>
+      <div className="App">
+        {isLoading ? (
+          <LoadingScreen />
+        ) : (
+          <>
+            <Navbar />
+            <div className="main-content">
+              <div className="feed-section">
+                <Routes>
+                  <Route path="/" element={<LandingPage />} />
+                  <Route path="/series" element={<Feed />} />
+                </Routes>
+              </div>
+              <Sidebar />
             </div>
-            <Sidebar />
-          </div>
-        </>
-      )}
-    </div>
+          </>
+        )}
+      </div>
+    </Router>
   );
 }
 
