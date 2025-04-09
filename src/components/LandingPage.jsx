@@ -1,6 +1,12 @@
 import React from 'react';
 import './LandingPage.css';
 import Com_1 from '../assets/images/Com_1.jpg';
+import Com_2 from '../assets/images/Com_2.jpg';
+import Com_3 from '../assets/images/Com_3.jpg';
+import Com_4 from '../assets/images/Com_4.jpg';
+import Com_5 from '../assets/images/Com_5.jpg';
+import Com_6 from '../assets/images/Com_6.jpg';
+
 
 function LandingPage() {
   const portfolioItems = [
@@ -13,40 +19,40 @@ function LandingPage() {
       comments: 8
     },
     {
-        id: 1,
-        image: Com_1,
+        id: 2,
+        image: Com_2,
         sketch: "/path/to/sketch1.jpg",
         title: "Sketched this woman in Tokyo.",
         likes: 33,
         comments: 8
       },
       {
-        id: 1,
-        image: Com_1,
+        id: 3,
+        image: Com_3,
         sketch: Com_1,
         title: "Sketched this woman in Tokyo.",
         likes: 33,
         comments: 8
       },
       {
-        id: 1,
-        image: Com_1,
+        id: 4,
+        image: Com_4,
         sketch: Com_1,
         title: "Sketched this woman in Tokyo.",
         likes: 33,
         comments: 8
       },
       {
-        id: 1,
-        image: Com_1,
+        id: 5,
+        image: Com_5,
         sketch: Com_1,
         title: "Sketched this woman in Tokyo.",
         likes: 33,
         comments: 8
       },
       {
-        id: 1,
-        image: Com_1,
+        id: 6,  
+        image: Com_6,
         sketch: Com_1,
         title: "Sketched this woman in Tokyo.",
         likes: 33,

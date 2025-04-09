@@ -10,6 +10,7 @@ import liveEventSketch from "../assets/videos/Live_Event_Sketch.mp4";
 import familyPortrait from "../assets/videos/Family_Portraits.mp4";
 import weddingMemorySketches from "../assets/videos/Wedding_Memory_Sketches.mp4";
 import customCommissionedArt from "../assets/videos/Custom_Commission_Art.mp4";
+import largeWeddingSketchGift from "../assets/videos/Large_Wedding_Sketch_Gift.mp4";
 import edl1 from "../assets/images/EDL_1.jpg";
 import edl2 from "../assets/images/EDL_2.jpg";
 import com1 from "../assets/images/Com_1.jpg";
@@ -26,6 +27,8 @@ import YapKeeWanton from "../assets/images/YapKee_Wanton.JPG";
 import HuiYangWeddingVideo from "../assets/videos/HuiYang_wedding.mp4";
 import KuehDadarVideo from "../assets/videos/Kueh_Dadar.mp4";
 import YapKeeWantonVideo from "../assets/videos/YapKee_Wanton.mp4";
+import LargePortraitSurprise from "../assets/videos/Large_Portrait_Surprise.mp4";
+import LargePortraitTimelapse from "../assets/videos/Large_Portrait_Timelapse.mp4";
 
 function Feed() {
   // Dummy data for posts
@@ -34,25 +37,31 @@ function Feed() {
       id: 1,
       username: "alice_K",
       media: [liveEventSketch, edl1, edl2, com1, com2, com3, com4, com5, com6, com7, com8, com9],
-      caption: "Commissioned quick sketches for my colleague and their kids! 🎨👨‍👩‍👧‍👦✏️"
+      caption: "Commissioned quick sketches for my colleague and their kids! 👨‍👩‍👧‍👦✏️"
     },
     {
       id: 2,
-      username: "HuiY_",
-      media: [weddingMemorySketches, HuiYangWeddingVideo],
-      caption: "Wedding highlight: Surprised guests with live portrait sketching at my special day! 🎨👰✨"
+      username: "Candice",
+      media: [largeWeddingSketchGift, LargePortraitSurprise, LargePortraitTimelapse],
+      caption: "Still in awe of how perfectly you captured us — even added my gown and made me look stunning without specs! 👰"
     },
     {
       id: 3,
+      username: "HuiY_",
+      media: [weddingMemorySketches, HuiYangWeddingVideo],
+      caption: "Wedding highlight: Surprised guests with live portrait sketching at my special day! 👰✨"
+    },
+    {
+      id: 4,
       username: "KapYee_Wanton", 
       media: [familyPortrait, YapKeeWanton, YapKeeWantonVideo],
       caption: "Commissioned Jeff to do a sketch for my parents' wanton mee store! Thank you Jeff for promoting our family business. So happy to see their smiles upon receiving this artwork! 🎨🥟✨"
     },
     {
-      id: 4,
+      id: 5,
       username: "Jas_",
       media: [customCommissionedArt, KuehDadarVideo, kuehDadar, angkukueh, ondehOndeh, kuehUbi, kuehSalat, kuehLapis],
-      caption: "Check out these amazing desserts! Got a commission for my kueh illos! 🎨👩‍🍳✨"
+      caption: "Check out these amazing desserts! Got a commission for my kueh illos! 👩‍🍳✨"
     },
     // ... more dummy posts
   ];

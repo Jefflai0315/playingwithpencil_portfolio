@@ -14,24 +14,29 @@ function Post({ username, media, caption }) {
   const [showControls, setShowControls] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [showPlayButton, setShowPlayButton] = useState(false);
   const videoRefs = useRef({});
 
   useEffect(() => {
-    // Create intersection observer
     const options = {
       root: null,
       rootMargin: '0px',
-      threshold: 0.7 // 70% of the video must be visible
+      threshold: 0.7
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
+        const video = entry.target;
         if (entry.isIntersecting) {
-          // Video is in view
-          entry.target.play();
+          // Ensure video is muted before attempting autoplay
+          video.muted = true;
+          // Use play().catch to handle autoplay rejection gracefully
+          video.play().catch(error => {
+            console.log("Autoplay prevented:", error);
+            // You could show a play button here if needed
+          });
         } else {
-          // Video is out of view
-          entry.target.pause();
+          video.pause();
         }
       });
     }, options);
@@ -139,6 +144,22 @@ function Post({ username, media, caption }) {
               <source src={mediaUrl} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
+            
+            {showPlayButton && (
+              <div 
+                className="play-button-overlay"
+                onClick={() => {
+                  const video = videoRefs.current[index];
+                  video.muted = true;
+                  video.play().catch(console.error);
+                  setShowPlayButton(false);
+                }}
+              >
+                <button className="play-button">
+                  Play Video
+                </button>
+              </div>
+            )}
             
             {showControls && currentSlide === index && (
               <div className="video-controls"  onClick={(e) => {
