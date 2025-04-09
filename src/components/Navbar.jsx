@@ -147,62 +147,80 @@ function Navbar() {
   
   return (
     <div className={`navbar-container ${visible ? 'navbar-visible' : 'navbar-hidden'}`}>
-      <nav className="navbar w-full h-16">
-        <div className="nav-left">
-          <Link to="/">
-          <img 
-            src={pwpLogo} 
-            alt="PWP Logo" 
-            className="logo"
-          />
-          </Link>
-        </div>
-        <div className="nav-center flex flex-row gap-4">
-          <div className="contact-icon-mobile cursor-pointer">
-            <UseAnimations
-              animation={mail}
-              size={32}
-              onClick={handleContactClick}
-              reverse={checked}
-            />
-            {checked && renderContactPopup()}
+      <nav className="navbar">
+        <div className="nav-content">
+          {/* Left section */}
+          <div className="nav-left">
+            <Link to="/" className="logo-container">
+              <img 
+                src={pwpLogo} 
+                alt="PWP Logo" 
+                className="logo"
+              />
+            </Link>
           </div>
-          <div className="feedback-icon">
-            <div className="contact-icon-mobile cursor-pointer">
-              <Link to="/series">
-                <UseAnimations
-                  animation={youtube2}
-                  size={32}
-                />
-                </Link>
-               
+
+          {/* Center section */}
+          <div className="nav-center">
+            <Link to="/" className="nav-item" title="Home">
+              <svg xmlns="http://www.w3.org/2000/svg" className="nav-icon" viewBox="0 0 24 24">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+            </Link>
+
+            <Link to="/series" className="nav-item" title="Series">
+              <UseAnimations
+                animation={youtube2}
+                size={28}
+                className="nav-icon"
+              />
+            </Link>
+
+            <div className="nav-item" onClick={handleContactClick} title="Contact">
+              <UseAnimations
+                animation={mail}
+                size={28}
+                className="nav-icon"
+                reverse={checked}
+              />
+            </div>
+
+            <div className="nav-item" onClick={handleFeedbackClick} title="Feedback">
+              <UseAnimations
+                animation={edit}
+                size={28}
+                className="nav-icon"
+              />
             </div>
           </div>
-          <div className="feedback-icon">
-            <div className="contact-icon-mobile cursor-pointer">
-                <UseAnimations
-                  animation={edit}
-                  size={32}
-                  onClick={handleFeedbackClick}
-                />
-                {showFeedbackMessage && (
-                  <div className="feedback-dropdown">
-                    <p>Website under development! 🚀</p>
-                    <p>Thank you for supporting me as both an artist and software engineer.</p>
-                    <a 
-                      href="https://playingwithpencil.canny.io/feature-requests" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="feedback-link"
-                    >
-                      Share your feedback →
-                    </a>
-                  </div>
-                )}
-            </div>
+
+          {/* Right section - can be used for future features */}
+          <div className="nav-right">
+            {/* Profile or additional features can go here */}
           </div>
         </div>
       </nav>
+
+      {/* Popups */}
+      {checked && renderContactPopup()}
+      {showFeedbackMessage && (
+        <div className="feedback-message">
+          <div className="feedback-content">
+            <h3>Welcome to PWP! 🎨</h3>
+            <p>Website under development! 🚀</p>
+            <p>Thank you for supporting me as both an artist and software engineer.</p>
+            <a 
+              href="https://playingwithpencil.canny.io/feature-requests" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="feedback-link"
+            >
+              Share your feedback →
+            </a>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
