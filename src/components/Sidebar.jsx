@@ -19,6 +19,14 @@ function Sidebar() {
     setShowContactMenu(!showContactMenu);
   };
 
+  const handleContactWAClick = (e) => {
+    e.stopPropagation();
+    window.open('https://wa.me/+6591866059', '_blank');
+  };
+
+ 
+
+
   // Close popup when clicking outside
   React.useEffect(() => {
     const closePopup = () => setShowContactMenu(false);
@@ -145,7 +153,7 @@ function Sidebar() {
         <h3>Commission a Portrait</h3>
         <button 
           className="contact-button" 
-          onClick={handleContactClick}
+          onClick={handleContactWAClick}
         >
           Contact Me
         </button>
