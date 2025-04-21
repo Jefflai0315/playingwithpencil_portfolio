@@ -36,7 +36,7 @@ function App() {
             <div className="main-content">
               <div className="feed-section">
                 <Routes>
-                  <Route path="/" element={<LandingPage />} />
+                  <Route path="/dashboard" element={<LandingPage />} />
                   <Route path="/series" element={<Feed />} />
                 </Routes>
               </div>

@@ -69,8 +69,143 @@
 .portrait-container {
   position: relative;
   aspect-ratio: 3/4;
-  opacity: 0.75;
   background: #f5f5f5;
+  overflow: hidden;
+  transform: translateZ(0);
+  will-change: transform, opacity, box-shadow;
+}
+
+/* Animation keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+/* Animation classes */
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.animation-delay-0 {
+  animation-delay: 0.1s;
+}
+
+.animation-delay-1 {
+  animation-delay: 0.2s;
+}
+
+.animation-delay-2 {
+  animation-delay: 0.3s;
+}
+
+.animation-delay-3 {
+  animation-delay: 0.4s;
+}
+
+.animation-delay-4 {
+  animation-delay: 0.5s;
+}
+
+.animation-delay-5 {
+  animation-delay: 0.6s;
+}
+
+/* Add hover and idle animations */
+.portrait-item {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-fade-in-up:nth-child(odd) .portrait-item {
+  animation-duration: 5s;
+}
+
+.animate-fade-in-up:nth-child(3n) .portrait-item {
+  animation-duration: 7s;
+  animation-delay: 0.2s;
+}
+
+.portrait-item:hover {
+  animation: pulse 1.5s ease-in-out;
+  z-index: 10;
+}
+
+/* Improve hover effect */
+.group:hover .group-hover\:scale-110 {
+  transform: scale(1.1);
+}
+
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1 !important;
+}
+
+.group:hover .group-hover\:translate-y-0 {
+  transform: translateY(0) !important;
+}
+
+/* Add subtle shimmer effect for idle state */
+.portrait-container::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  opacity: 0;
+  transition: opacity 0.6s;
+  pointer-events: none;
+}
+
+.portrait-container:hover::after {
+  animation: shimmer 1.5s forwards;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: rotate(30deg) translateX(-100%);
+    opacity: 0.5;
+  }
+  100% {
+    transform: rotate(30deg) translateX(100%);
+    opacity: 0;
+  }
 }
 
 .portrait-photo {
@@ -94,4 +229,484 @@
   gap: 15px;
   font-size: 14px;
   color: #666;
+}
+
+/* Commission Button */
+.commission-button {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  background-color: #f8f5ef;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  font-weight: 500;
+  color: #333;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.commission-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+
+.commission-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  background-color: #f3eee3;
+}
+
+.commission-button:hover::before {
+  transform: translateX(100%);
+}
+
+.commission-icon {
+  font-size: 1.25rem;
+  margin-right: 8px;
+}
+
+/* Floating Action Button */
+.fab-commission {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #f3eee3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  border: none;
+  cursor: pointer;
+  z-index: 100;
+  transform: scale(1);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  animation: pulse 2s infinite;
+}
+
+.fab-commission:hover {
+  transform: scale(1.05) rotate(5deg);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.fab-icon {
+  font-size: 1.5rem;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+/* Contact Modal */
+.contact-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.contact-modal {
+  background-image: url('../assets/images/texture_paper_bg.jpg');
+  background-repeat: repeat;
+  max-width: 600px;
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  animation: modalSlideUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-modal-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact-modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.contact-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #777;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.contact-close-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #333;
+}
+
+.contact-modal-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.contact-info {
+  margin-bottom: 1.5rem;
+}
+
+.contact-info p {
+  margin: 0 0 1rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+.sketch-samples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.sample-tag {
+  background-color: #f8f5ef;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #555;
+  transition: all 0.2s ease;
+}
+
+.sample-tag:hover {
+  background-color: #f3eee3;
+  transform: translateY(-1px);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #444;
+}
+
+.form-group input, 
+.form-group textarea {
+  padding: 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #ffffff;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+  outline: none;
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.radio-group {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.radio-label input {
+  margin: 0;
+}
+
+.submit-btn {
+  margin-top: 0.5rem;
+  padding: 0.85rem 1.5rem;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-end;
+}
+
+.submit-btn:hover {
+  background-color: #222;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Success Message */
+.success-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.success-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #d0f5e6;
+  color: #1a866c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  animation: scaleUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.success-message h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.success-message p {
+  margin: 0;
+  color: #555;
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-modal {
+    max-height: 90vh;
+    overflow-y: auto;
+    margin-bottom: 0;
+  }
+  
+  .contact-modal-overlay {
+    padding: 1rem;
+    align-items: flex-end;
+  }
+  
+  .contact-modal {
+    border-radius: 16px 16px 0 0;
+    max-width: none;
+    animation: modalSlideUpMobile 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  
+  @keyframes modalSlideUpMobile {
+    from {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .submit-btn {
+    width: 100%;
+  }
+}
+
+/* File Upload */
+.file-upload-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.file-upload-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  background-color: #f8f5ef;
+  border: 1px dashed rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  font-weight: 500;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.file-upload-btn:hover {
+  background-color: #f3eee3;
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+.file-upload-info {
+  font-size: 0.8rem;
+  color: #777;
+  margin-left: 0.5rem;
+}
+
+.photo-preview-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.photo-preview {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+}
+
+.photo-preview img {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.photo-name {
+  font-size: 0.7rem;
+  color: #555;
+  padding: 0.25rem 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+.remove-photo-btn {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.remove-photo-btn:hover {
+  background-color: #fff;
+  color: #000;
+  transform: scale(1.1);
+}
+
+/* Error Message */
+.error-message {
+  background-color: #fff2f2;
+  border: 1px solid #ffcaca;
+  color: #d32f2f;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+/* Mobile Form Adjustments */
+@media (max-width: 640px) {
+  .photo-preview-container {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  }
+  
+  .photo-preview {
+    height: 100px;
+  }
+  
+  .photo-preview img {
+    height: 70px;
+  }
 } 
