@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import LandingPage from "./components/LandingPage";
 import Feed from "./components/Feed";
-import Sidebar from "./components/Sidebar";
+// import Sidebar from "./components/Sidebar";
 import LoadingScreen from "./components/LoadingScreen";
+import PlatinumExperience from "./pages/PlatinumExperience";
+import Booking from "./pages/Booking";
+import Contact from "./pages/Contact";
 import "./App.css";
 
 function App() {
@@ -27,21 +31,26 @@ function App() {
   }, []);
   return (
     <Router>
-      <div className="App">
+      <div className="App flex min-h-screen flex-col">
         {isLoading ? (
           <LoadingScreen />
         ) : (
           <>
             <Navbar />
-            <div className="main-content">
-              <div className="feed-section">
-                <Routes>
-                  <Route path="/dashboard" element={<LandingPage />} />
-                  <Route path="/series" element={<Feed />} />
-                </Routes>
-              </div>
-              <Sidebar />
+            <div className="main-content flex-grow">
+              <Routes>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/services" element={<PlatinumExperience />} />
+                <Route path="/home" element={<LandingPage />} />
+                <Route
+                  path="/platinum-experience"
+                  element={<PlatinumExperience />}
+                />
+                <Route path="/booking" element={<Booking />} />
+                {/* <Route path="/contact" element={<Contact />} /> */}
+              </Routes>
             </div>
+            <Footer />
           </>
         )}
       </div>

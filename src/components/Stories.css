@@ -1,37 +1,77 @@
 .stories-container {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    /* border: 1px solid #dbdbdb; */
-    /* background-color: #fff; */
-    padding: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .story {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 15px;
-    text-align: center;
-  }
-  
-  .story-img {
-    width: 60px;
-    height: 60px;
-    border: 2px solid #dbdbdb;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    font-size: 30px;
-    background: #fafafa;
-  }
-  
-  .story-username {
-    font-size: 12px;
-    margin-top: 5px;
-    white-space: nowrap;
-  }
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scroll-behavior: smooth;
+}
+
+.stories-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.story {
+  flex: 0 0 auto;
+  width: 200px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.story:hover {
+  transform: translateY(-5px);
+}
+
+.story-img {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.story-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.story:hover .story-img img {
+  transform: scale(1.1);
+}
+
+.story-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.story:hover .story-overlay {
+  opacity: 1;
+}
+
+.service-icon {
+  font-size: 2rem;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.story-username {
+  margin-top: 0.5rem;
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
   

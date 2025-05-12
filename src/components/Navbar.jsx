@@ -196,8 +196,8 @@ function Navbar() {
             {/* Navigation menu - Desktop only */}
             <div className="hidden md:flex gap-4">
               <Link 
-                to="/dashboard" 
-                className={`nav-item ${isActive('/dashboard') ? 'nav-active' : ''}`}
+                to="/" 
+                className={`nav-item ${isActive('/') ? 'nav-active' : ''}`}
                 title="Explore my sketches"
               >
                 <UseAnimations
@@ -209,8 +209,8 @@ function Navbar() {
               </Link>
 
               <Link 
-                to="/series" 
-                className={`nav-item ${isActive('/series') ? 'nav-active' : ''}`}
+                to="/services" 
+                className={`nav-item ${isActive('/services') ? 'nav-active' : ''}`}
                 title="Browse my sketch series"
               >
                 <UseAnimations
@@ -282,8 +282,8 @@ function Navbar() {
             <div className="mobile-menu-content">
               <div className="mobile-menu-item">
                 <Link 
-                  to="/dashboard" 
-                  className={isActive('/dashboard') ? 'active' : ''}
+                  to="/" 
+                  className={isActive('/') ? 'active' : ''}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <svg className="mobile-menu-icon" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none">
@@ -295,8 +295,8 @@ function Navbar() {
               </div>
               <div className="mobile-menu-item">
                 <Link 
-                  to="/series" 
-                  className={isActive('/series') ? 'active' : ''}
+                  to="/services" 
+                  className={isActive('/services') ? 'active' : ''}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <svg className="mobile-menu-icon" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none">
@@ -338,7 +338,7 @@ function Navbar() {
               </div>
             </div>
             <div className="mobile-menu-footer">
-              <p>© 2023 Playing With Pencil</p>
+              <p>© 2025 Playing With Pencil</p>
             </div>
           </div>
         </div>
